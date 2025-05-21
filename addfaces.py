@@ -1,7 +1,7 @@
  import cv2
 import pickle
 import numpy as np
-import os
+import os # to store it in pickle file
 video=cv2.VideoCapture(0) # opens the built in web camera and video is a camera object , opens inbuilt for 0 , external use 1
 facedetect=cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml') # detects face using this file
 faces_data=[]# empty list to store face data
@@ -28,23 +28,28 @@ video.release()#stop the webcam
 cv2.destroyAllWindows()#terminate all the windows
 faces_data=np.asarray(faces_data)#converting into numpy array
 faces_data=faces_data.reshape(100,-1) # we are reshaping so that this can be pased to machine learning model
+
+
 if 'names.pkl' not in os.listdir('data/'):#create a names directory to store the names of the user
     names=[name]*100
     with open('data/names.pkl', 'wb') as f:
-        pickle.dump(names, f)
-else:
+        pickle.dump(names, f) # saving it in pickle file
+ else:
+  # if it exist and creating another  user
+  # concatinating here 
     with open('data/names.pkl', 'rb') as f:
         names=pickle.load(f)
     names=names+[name]*100
     with open('data/names.pkl', 'wb') as f:
         pickle.dump(names, f)
-
+# the same is being done for faces
+# creating a new face intially
 if 'faces_data.pkl' not in os.listdir('data/'):
     with open('data/faces_data.pkl', 'wb') as f:
         pickle.dump(faces_data, f)
 else:
     with open('data/faces_data.pkl', 'rb') as f:
         faces=pickle.load(f)
-    faces=np.append(faces, faces_data, axis=0)
+    faces=np.append(faces, faces_data, axis=0) # adding the next user's face 
     with open('data/faces_data.pkl', 'wb') as f:
         pickle.dump(faces, f)
