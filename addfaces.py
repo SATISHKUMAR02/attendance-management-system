@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 import os
 video=cv2.VideoCapture(0) # opens the built in web camera and video is a camera object , opens inbuilt for 0 , external use 1
-facedetect=cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml')
+facedetect=cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml') # detects face using this file
 faces_data=[]# empty list to store face data
 name = input("Enter your name ")
 i=0
@@ -18,12 +18,13 @@ while True:
             faces_data.append(resized_img)
         i=i+1
         cv2.putText(frame,str(len(faces_data)),(50,50),cv2.FONT_HERSHEY_COMPLEX,1,(50,50,255),1)#To display the text on the image
+                #            sixe of the frame , color and thickness
         cv2.rectangle(frame,(x,y),(x+w,y+h),(50,50,255),1)
     cv2.imshow("Frame",frame)#open a new window and show your face
-    k=cv2.waitKey(1)
+    k=cv2.waitKey(1) # this will break the loop here when we click the q
     if k==ord('q') or len(faces_data)==100:
         break
-video.release()#stop the webcam
+video.release()#stop the webcam  
 cv2.destroyAllWindows()#terminate all the windows
 faces_data=np.asarray(faces_data)#converting into numpy array
 faces_data=faces_data.reshape(100,-1)
