@@ -1,4 +1,4 @@
-import cv2
+ import cv2
 import pickle
 import numpy as np
 import os
@@ -6,7 +6,7 @@ video=cv2.VideoCapture(0) # opens the built in web camera and video is a camera 
 facedetect=cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml') # detects face using this file
 faces_data=[]# empty list to store face data
 name = input("Enter your name ")
-i=0
+i=0 
 while True:
     ret,frame=video.read()# returns two values - if webcam is working or not and the other is the frames
     gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY) #To convert bgr images to grayscale
@@ -27,7 +27,7 @@ while True:
 video.release()#stop the webcam  
 cv2.destroyAllWindows()#terminate all the windows
 faces_data=np.asarray(faces_data)#converting into numpy array
-faces_data=faces_data.reshape(100,-1)
+faces_data=faces_data.reshape(100,-1) # we are reshaping so that this can be pased to machine learning model
 if 'names.pkl' not in os.listdir('data/'):#create a names directory to store the names of the user
     names=[name]*100
     with open('data/names.pkl', 'wb') as f:
