@@ -44,10 +44,12 @@ while True:
         speak("Attendance Taken..")
         time.sleep(0.5)#Freezes the frame for 2 seconds
         if exist :
+            # if there is an already existing file 
             with open("Attendance/Attendance_" + date + ".csv", "+a") as csvfile:
               writer = csv.writer(csvfile)
               writer.writerow(attendance)
         else :
+            # if there is no file
             with open("Attendance/Attendance_" + date + ".csv" ,"+a") as csvfile:
                 writer = csv.writer(csvfile)#creating an object to call the writer method to write content into csv file
                 writer.writerow(COL_NAMES)
