@@ -2,7 +2,7 @@ import cv2
 import pickle
 import numpy as np
 import os
-video=cv2.VideoCapture(0) # opens the built in web camera and video is a camera object
+video=cv2.VideoCapture(0) # opens the built in web camera and video is a camera object , opens inbuilt for 0 , external use 1
 facedetect=cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml')
 faces_data=[]# empty list to store face data
 name = input("Enter your name ")
